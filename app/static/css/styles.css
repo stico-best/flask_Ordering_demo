@@ -1,0 +1,59 @@
+/* 全局样式 */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* 导航栏滚动效果 */
+#navbar {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+#navbar.scrolled {
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* 轮播图样式 */
+.carousel-item.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.carousel-indicator.active {
+    background-color: white;
+}
+
+/* 分类侧边栏样式 */
+.category-item.active {
+    background-color: #FFEDD5;
+    color: #F97316;
+}
+
+/* 购物车侧边栏 */
+#cartSidebar.active {
+    transform: translateX(0);
+}
+
+/* 用户菜单下拉框 */
+#userMenu.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 登录模态框 */
+#loginModal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#loginModal.active .bg-white {
+    transform: scale(1);
+}
+
+/* 移动端菜单 */
+#mobileMenu.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
