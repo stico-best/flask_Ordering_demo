@@ -1,0 +1,110 @@
+<!-- 用户登录页 -->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>味美轩 - 美食餐厅</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#B91C1C', // 深红色作为主色调
+                        secondary: '#F97316', // 橙色作为辅助色
+                        neutral: {
+                            100: '#F8FAFC',
+                            200: '#E2E8F0',
+                            300: '#CBD5E1',
+                            700: '#334155',
+                            800: '#1E293B',
+                            900: '#0F172A',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .form-input-focus {
+                @apply focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none;
+            }
+            .btn-primary {
+                @apply bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98];
+            }
+            .btn-secondary {
+                @apply bg-white border border-neutral-300 hover:bg-neutral-100 text-neutral-800 font-medium py-2 px-4 rounded-lg transition-all duration-300;
+            }
+            .card-shadow {
+                @apply shadow-lg hover:shadow-xl transition-shadow duration-300;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-neutral-100 to-neutral-200 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- 登录卡片 -->
+        <div id="login-card" class="bg-white rounded-2xl card-shadow p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-neutral-800 mb-2">欢迎回来</h2>
+                <p class="text-neutral-600">请登录您的账户继续</p>
+            </div>
+
+            <form id="login-form" class="space-y-5" method="POST">
+                <div>
+                    <label for="login-username" class="block text-sm font-medium text-neutral-700 mb-1">用户名</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-neutral-500">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <input type="text" id="login-username" name="username" required
+                            class="pl-10 w-full px-4 py-2 border border-neutral-300 rounded-lg form-input-focus"
+                            placeholder="请输入用户名">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="login-password" class="block text-sm font-medium text-neutral-700 mb-1">密码</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-neutral-500">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <input type="password" id="login-password" name="password" required
+                            class="pl-10 w-full px-4 py-2 border border-neutral-300 rounded-lg form-input-focus"
+                            placeholder="请输入密码">
+                        <button type="button" id="toggle-login-password" class="absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-500 hover:text-neutral-700">
+                            <i class="fa fa-eye-slash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary border-neutral-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-neutral-600">记住我</label>
+                    </div>
+                    <a href="#" class="text-sm font-medium text-primary hover:text-primary/80">注册账号?</a>
+                </div>
+
+                <button type="submit" class="w-full btn-primary">
+                    <i class="fa fa-sign-in mr-2"></i>登录
+                </button>
+            </form>
+        </div>
+        <!-- 页脚 -->
+        <div class="text-center text-neutral-500 text-sm mt-6">
+            <p>© 2025 餐厅点餐系统 | 保留所有权利</p>
+        </div>
+    </div>
+</body>
+</html>
