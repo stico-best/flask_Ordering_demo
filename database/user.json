@@ -1,34 +1,22 @@
 [
-  {
-    "username": "admin",
-    "password": "12345678"
-  },
-  {
-    "username": "root",
-    "password": "12345678"
-  },
-  {
-    "username": "stico",
-    "password": "12345678"
-  },
-  {
-    "username": "bob",
-    "password": "12345678"
-  },
-  {
-    "username": "cruise",
-    "password": "12345678"
-  },
-  {
-    "username": "falcons",
-    "password": "12345678"
-  },
-  {
-    "username": "python",
-    "password": "12345678"
-  },
-  {
-    "username": "administer",
-    "password": "12345678"
-  }
+    {
+        "username": "admin",
+        "password": "12345678"
+    },
+    {
+        "username": "root",
+        "password": "12345678"
+    },
+    {
+        "username": "stico",
+        "password": "12345678"
+    },
+    {
+        "username": "111",
+        "password": "11111111"
+    },
+    {
+        "username": "123",
+        "password": "11111111"
+    }
 ]

@@ -60,7 +60,7 @@
                 <p class="text-neutral-600">请登录您的账户继续</p>
             </div>
 
-            <form id="login-form" class="space-y-5" method="POST">
+            <form id="login-form" class="space-y-5">
                 <div>
                     <label for="login-username" class="block text-sm font-medium text-neutral-700 mb-1">用户名</label>
                     <div class="relative">
@@ -93,18 +93,489 @@
                         <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary focus:ring-primary border-neutral-300 rounded">
                         <label for="remember-me" class="ml-2 block text-sm text-neutral-600">记住我</label>
                     </div>
-                    <a href="#" class="text-sm font-medium text-primary hover:text-primary/80">注册账号?</a>
+                    <a href="#" class="text-sm font-medium text-primary hover:text-primary/80">忘记密码?</a>
                 </div>
 
                 <button type="submit" class="w-full btn-primary">
                     <i class="fa fa-sign-in mr-2"></i>登录
                 </button>
+
+                <div class="relative flex items-center mt-6">
+                    <div class="flex-grow border-t border-neutral-300"></div>
+                    <span class="flex-shrink mx-4 text-neutral-500">或者</span>
+                    <div class="flex-grow border-t border-neutral-300"></div>
+                </div>
+
+                <button type="button" id="register-btn" class="w-full btn-secondary">
+                    <i class="fa fa-user-plus mr-2"></i>注册新账户
+                </button>
             </form>
         </div>
+
+        <!-- 注册卡片 (默认隐藏) -->
+        <div id="register-card" class="hidden bg-white rounded-2xl card-shadow p-8 mt-6">
+            <div class="text-center mb-8">
+                <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-neutral-800 mb-2">创建新账户</h2>
+                <p class="text-neutral-600">填写以下信息注册您的账户</p>
+            </div>
+
+            <form id="register-form" class="space-y-5">
+                <div>
+                    <label for="register-username" class="block text-sm font-medium text-neutral-700 mb-1">用户名</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-neutral-500">
+                            <i class="fa fa-user-plus"></i>
+                        </span>
+                        <input type="text" id="register-username" name="username" required
+                            class="pl-10 w-full px-4 py-2 border border-neutral-300 rounded-lg form-input-focus"
+                            placeholder="请输入用户名">
+                    </div>
+                    <p id="username-error" class="hidden mt-1 text-sm text-red-500"></p>
+                </div>
+
+                <div>
+                    <label for="register-password" class="block text-sm font-medium text-neutral-700 mb-1">密码</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-neutral-500">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <input type="password" id="register-password" name="password" required
+                            class="pl-10 w-full px-4 py-2 border border-neutral-300 rounded-lg form-input-focus"
+                            placeholder="请输入密码">
+                        <button type="button" id="toggle-register-password" class="absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-500 hover:text-neutral-700">
+                            <i class="fa fa-eye-slash"></i>
+                        </button>
+                    </div>
+                    <div class="mt-1">
+                        <div class="w-full bg-neutral-200 rounded-full h-1.5">
+                            <div id="password-strength" class="bg-red-500 h-1.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <p id="password-hint" class="mt-1 text-xs text-neutral-500">密码至少包含8个字符，包括大小写字母和数字</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="register-confirm-password" class="block text-sm font-medium text-neutral-700 mb-1">确认密码</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-neutral-500">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <input type="password" id="register-confirm-password" name="confirm-password" required
+                            class="pl-10 w-full px-4 py-2 border border-neutral-300 rounded-lg form-input-focus"
+                            placeholder="请再次输入密码">
+                        <button type="button" id="toggle-confirm-password" class="absolute inset-y-0 right-0 flex items-center pr-3 text-neutral-500 hover:text-neutral-700">
+                            <i class="fa fa-eye-slash"></i>
+                        </button>
+                    </div>
+                    <p id="password-match-error" class="hidden mt-1 text-sm text-red-500"></p>
+                </div>
+
+                <button type="submit" class="w-full btn-primary">
+                    <i class="fa fa-check mr-2"></i>注册并登录
+                </button>
+
+                <div class="text-center">
+                    <button type="button" id="back-to-login" class="text-sm font-medium text-primary hover:text-primary/80">
+                        <i class="fa fa-arrow-left mr-1"></i>返回登录
+                    </button>
+                </div>
+            </form>
+        </div>
+
         <!-- 页脚 -->
         <div class="text-center text-neutral-500 text-sm mt-6">
             <p>© 2025 餐厅点餐系统 | 保留所有权利</p>
         </div>
     </div>
+
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const loginCard = document.getElementById('login-card');
+            const registerCard = document.getElementById('register-card');
+            const registerBtn = document.getElementById('register-btn');
+            const backToLoginBtn = document.getElementById('back-to-login');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const toggleLoginPasswordBtn = document.getElementById('toggle-login-password');
+            const toggleRegisterPasswordBtn = document.getElementById('toggle-register-password');
+            const toggleConfirmPasswordBtn = document.getElementById('toggle-confirm-password');
+            const loginPasswordInput = document.getElementById('login-password');
+            const registerPasswordInput = document.getElementById('register-password');
+            const confirmPasswordInput = document.getElementById('register-confirm-password');
+            const passwordStrengthBar = document.getElementById('password-strength');
+            const passwordHint = document.getElementById('password-hint');
+            const usernameInput = document.getElementById('register-username');
+            const usernameError = document.getElementById('username-error');
+            const passwordMatchError = document.getElementById('password-match-error');
+
+            // 切换到注册表单
+            registerBtn.addEventListener('click', function() {
+                loginCard.classList.add('hidden');
+                registerCard.classList.remove('hidden');
+                // 添加淡入动画
+                registerCard.classList.add('animate-fade-in');
+                // 清空注册表单
+                registerForm.reset();
+                resetRegisterFormState();
+            });
+
+            // 返回登录表单
+            backToLoginBtn.addEventListener('click', function() {
+                registerCard.classList.add('hidden');
+                loginCard.classList.remove('hidden');
+                // 清空登录表单
+                loginForm.reset();
+            });
+
+            // 切换登录密码可见性
+            toggleLoginPasswordBtn.addEventListener('click', function() {
+                togglePasswordVisibility(loginPasswordInput, toggleLoginPasswordBtn);
+            });
+
+            // 切换注册密码可见性
+            toggleRegisterPasswordBtn.addEventListener('click', function() {
+                togglePasswordVisibility(registerPasswordInput, toggleRegisterPasswordBtn);
+            });
+
+            // 切换确认密码可见性
+            toggleConfirmPasswordBtn.addEventListener('click', function() {
+                togglePasswordVisibility(confirmPasswordInput, toggleConfirmPasswordBtn);
+            });
+
+            // 密码强度检测
+            registerPasswordInput.addEventListener('input', function() {
+                const password = registerPasswordInput.value;
+                updatePasswordStrength(password);
+                checkPasswordMatch();
+            });
+
+            // 确认密码输入检测
+            confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+
+            // 用户名输入检测（模拟检查用户名是否存在）
+            usernameInput.addEventListener('input', function() {
+                // 模拟API请求延迟
+                clearTimeout(this.checkTimeout);
+                this.checkTimeout = setTimeout(() => {
+                    checkUsernameAvailability(usernameInput.value);
+                }, 300);
+            });
+
+            // 登录表单提交
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('login-username').value;
+                const password = document.getElementById('login-password').value;
+
+                // 显示加载状态
+                const loginBtn = loginForm.querySelector('button[type="submit"]');
+                const originalText = loginBtn.innerHTML;
+                loginBtn.disabled = true;
+                loginBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i>登录中...';
+
+                // 发送登录请求到后端
+                fetch('/login', {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        username: username,
+                        password: password
+                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        loginBtn.disabled = false;
+                        loginBtn.innerHTML = originalText;
+                        if (data.success) {
+                            showNotification(data.message, 'success');
+                            // 登录成功后跳转
+                            setTimeout(() => {
+                                window.location.href = '/home';
+                            }, 1500);
+                        } else {
+                            showNotification(data.message, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        loginBtn.disabled = false;
+                        loginBtn.innerHTML = originalText;
+                        showNotification('登录请求失败: ' + error.message, 'error');
+                    })
+            });
+
+            // 注册表单提交
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // 验证表单
+                if (!validateRegisterForm()) {
+                    return;
+                }
+
+                const username = document.getElementById('register-username').value;
+                const password = document.getElementById('register-password').value;
+
+                // 显示加载状态
+                const registerBtn = registerForm.querySelector('button[type="submit"]');
+                const originalText = registerBtn.innerHTML;
+                registerBtn.disabled = true;
+                registerBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i>注册中...';
+
+                // 发送注册请求到后端
+                fetch('/register', {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        username: username,
+                        password: password
+                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        registerBtn.disabled = false;
+                        registerBtn.innerHTML = originalText;
+
+                        if (data.success) {
+                            showNotification(data.message, 'success');
+                            // 注册成功后跳转到登录页面
+                            setTimeout(() => {
+                                registerCard.classList.add('hidden');
+                                loginCard.classList.remove('hidden');
+                                loginForm.reset();
+                            }, 1500);
+                        } else {
+                            showNotification(data.message, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        registerBtn.disabled = false;
+                        registerBtn.innerHTML = originalText;
+                        showNotification('注册请求失败: ' + error.message, 'error');
+                });
+            });
+
+            // 辅助函数：切换密码可见性
+            function togglePasswordVisibility(passwordInput, toggleBtn) {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // 切换图标
+                if (type === 'text') {
+                    toggleBtn.innerHTML = '<i class="fa fa-eye"></i>';
+                } else {
+                    toggleBtn.innerHTML = '<i class="fa fa-eye-slash"></i>';
+                }
+            }
+
+            // 辅助函数：更新密码强度指示
+            function updatePasswordStrength(password) {
+                let strength = 0;
+
+                // 密码长度检查
+                if (password.length >= 8) strength += 25;
+
+                // 包含小写字母
+                if (/[a-z]/.test(password)) strength += 25;
+
+                // 包含大写字母
+                if (/[A-Z]/.test(password)) strength += 25;
+
+                // 包含数字
+                if (/[0-9]/.test(password)) strength += 25;
+
+                // 更新进度条颜色和宽度
+                passwordStrengthBar.style.width = `${strength}%`;
+
+                if (strength === 0) {
+                    passwordStrengthBar.className = 'bg-red-500 h-1.5 rounded-full';
+                    passwordHint.textContent = '密码至少包含8个字符，包括大小写字母和数字';
+                    passwordHint.className = 'mt-1 text-xs text-neutral-500';
+                } else if (strength <= 25) {
+                    passwordStrengthBar.className = 'bg-red-500 h-1.5 rounded-full';
+                    passwordHint.textContent = '密码强度弱，请使用更复杂的密码';
+                    passwordHint.className = 'mt-1 text-xs text-red-500';
+                } else if (strength <= 50) {
+                    passwordStrengthBar.className = 'bg-yellow-500 h-1.5 rounded-full';
+                    passwordHint.textContent = '密码强度中等，可以继续加强';
+                    passwordHint.className = 'mt-1 text-xs text-yellow-600';
+                } else if (strength <= 75) {
+                    passwordStrengthBar.className = 'bg-blue-500 h-1.5 rounded-full';
+                    passwordHint.textContent = '密码强度良好';
+                    passwordHint.className = 'mt-1 text-xs text-blue-600';
+                } else {
+                    passwordStrengthBar.className = 'bg-green-500 h-1.5 rounded-full';
+                    passwordHint.textContent = '密码强度优秀';
+                    passwordHint.className = 'mt-1 text-xs text-green-600';
+                }
+            }
+
+            // 辅助函数：检查两次输入的密码是否匹配
+            function checkPasswordMatch() {
+                const password = registerPasswordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+
+                if (confirmPassword && password !== confirmPassword) {
+                    passwordMatchError.textContent = '两次输入的密码不匹配';
+                    passwordMatchError.classList.remove('hidden');
+                    confirmPasswordInput.classList.add('border-red-500');
+                    confirmPasswordInput.classList.remove('border-neutral-300');
+                } else {
+                    passwordMatchError.classList.add('hidden');
+                    confirmPasswordInput.classList.remove('border-red-500');
+                    confirmPasswordInput.classList.add('border-neutral-300');
+                }
+            }
+
+            // 辅助函数：检查用户名是否可用（模拟）
+            function checkUsernameAvailability(username) {
+                // 清空之前的错误信息
+                usernameError.classList.add('hidden');
+                usernameInput.classList.remove('border-red-500');
+                usernameInput.classList.add('border-neutral-300');
+
+                // 空用户名不检查
+                if (!username) return;
+
+                // 模拟API请求
+                // 实际应用中这里应该是一个AJAX请求到后端检查用户名
+                // 这里仅做演示，假设用户名不能包含特殊字符且长度至少3个字符
+                const isValid = /^[a-zA-Z0-9]{3,}$/.test(username);
+
+                if (!isValid) {
+                    usernameError.textContent = '用户名必须至少3个字符，且只能包含字母和数字';
+                    usernameError.classList.remove('hidden');
+                    usernameInput.classList.add('border-red-500');
+                    usernameInput.classList.remove('border-neutral-300');
+                    return false;
+                }
+
+                // 模拟检查用户名是否已存在
+                // 这里假设几个常见用户名已被占用
+                const existingUsers = ['admin', 'user', 'test', 'root', 'guest'];
+                if (existingUsers.includes(username.toLowerCase())) {
+                    usernameError.textContent = '该用户名已被使用，请选择其他用户名';
+                    usernameError.classList.remove('hidden');
+                    usernameInput.classList.add('border-red-500');
+                    usernameInput.classList.remove('border-neutral-300');
+                    return false;
+                }
+
+                return true;
+            }
+
+            // 辅助函数：验证注册表单
+            function validateRegisterForm() {
+                let isValid = true;
+
+                // 检查用户名
+                if (!checkUsernameAvailability(usernameInput.value)) {
+                    isValid = false;
+                }
+
+                // 检查密码强度
+                const password = registerPasswordInput.value;
+                if (password.length < 8) {
+                    passwordHint.textContent = '密码长度至少需要8个字符';
+                    passwordHint.className = 'mt-1 text-xs text-red-500';
+                    isValid = false;
+                }
+
+                // 检查密码匹配
+                if (registerPasswordInput.value !== confirmPasswordInput.value) {
+                    passwordMatchError.textContent = '两次输入的密码不匹配';
+                    passwordMatchError.classList.remove('hidden');
+                    confirmPasswordInput.classList.add('border-red-500');
+                    confirmPasswordInput.classList.remove('border-neutral-300');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            // 辅助函数：重置注册表单状态
+            function resetRegisterFormState() {
+                usernameError.classList.add('hidden');
+                passwordMatchError.classList.add('hidden');
+                usernameInput.classList.remove('border-red-500');
+                usernameInput.classList.add('border-neutral-300');
+                registerPasswordInput.classList.remove('border-red-500');
+                registerPasswordInput.classList.add('border-neutral-300');
+                confirmPasswordInput.classList.remove('border-red-500');
+                confirmPasswordInput.classList.add('border-neutral-300');
+                passwordStrengthBar.style.width = '0%';
+                passwordStrengthBar.className = 'bg-red-500 h-1.5 rounded-full';
+                passwordHint.textContent = '密码至少包含8个字符，包括大小写字母和数字';
+                passwordHint.className = 'mt-1 text-xs text-neutral-500';
+            }
+
+            // 显示通知
+            function showNotification(message, type = 'info') {
+                // 创建通知元素
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full opacity-0`;
+
+                // 设置通知类型样式
+                if (type === 'success') {
+                    notification.classList.add('bg-green-50', 'border-l-4', 'border-green-500', 'text-green-800');
+                    notification.innerHTML = `
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fa fa-check-circle text-green-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium">${message}</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (type === 'error') {
+                    notification.classList.add('bg-red-50', 'border-l-4', 'border-red-500', 'text-red-800');
+                    notification.innerHTML = `
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fa fa-exclamation-circle text-red-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium">${message}</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    notification.classList.add('bg-blue-50', 'border-l-4', 'border-blue-500', 'text-blue-800');
+                    notification.innerHTML = `
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fa fa-info-circle text-blue-500"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium">${message}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // 添加到页面
+                document.body.appendChild(notification);
+
+                // 触发动画
+                setTimeout(() => {
+                    notification.classList.remove('translate-x-full', 'opacity-0');
+                }, 10);
+
+                // 设置自动关闭
+                setTimeout(() => {
+                    notification.classList.add('translate-x-full', 'opacity-0');
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 4000);
+            }
+        });
+    </script>
 </body>
 </html>
