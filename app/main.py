@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
 from config.logutil import Logger
 import os
 import json
@@ -90,3 +90,7 @@ def home():
 @app.route('/aboutus')
 def aboutus():
     return render_template(template_name_or_list='aboutus.html')
+
+@app.route('/menu')
+def menu():
+    return render_template(template_name_or_list='menu.html')

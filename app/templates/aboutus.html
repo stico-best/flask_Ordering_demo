@@ -24,8 +24,8 @@
                 <!-- 主导航 - 桌面版 -->
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">首页</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">特色招牌</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">全部菜品</a>
+                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">精选套餐</a>
+                    <a href="{{ url_for('menu') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">全部菜品</a>
                     <a href="{{ url_for('aboutus') }}" class="text-orange-600 hover:text-orange-700 transition-colors font-medium">关于我们</a>
                 </nav>
 
@@ -215,13 +215,13 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="overflow-hidden rounded-lg shadow-md group">
-                    <img src="https://picsum.photos/seed/store1/600/400" alt="门店外观" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="../static/images/门前招牌.png" alt="门前招牌" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="overflow-hidden rounded-lg shadow-md group">
-                    <img src="https://picsum.photos/seed/store2/600/400" alt="用餐区" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="../static/images/就餐大堂.png" alt="就餐大堂" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
                 <div class="overflow-hidden rounded-lg shadow-md group">
-                    <img src="https://picsum.photos/seed/store3/600/400" alt="厨房" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="../static/images/后厨环境.png" alt="后厨环境" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
                 </div>
             </div>
         </div>
@@ -326,7 +326,7 @@
                     <h4 class="text-lg font-bold mb-4">快速链接</h4>
                     <ul class="space-y-2">
                         <li><a href="{{ url_for('home') }}" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">菜单</a></li>
+                        <li><a href="{{ url_for('menu') }}" class="text-gray-400 hover:text-white transition-colors">菜单</a></li>
                         <li><a href="{{ url_for('aboutus') }}" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
                     </ul>
                 </div>

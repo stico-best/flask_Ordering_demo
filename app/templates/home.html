@@ -25,8 +25,8 @@
                 <!-- 主导航 - 桌面版 -->
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">首页</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">特色招牌</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">全部菜品</a>
+                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">精选套餐</a>
+                    <a href="{{ url_for('menu') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">全部菜品</a>
                     <a href="{{ url_for('aboutus') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">关于我们</a>
                 </nav>
 
@@ -176,14 +176,14 @@
                         <!-- 特价商品卡片 1 -->
                         <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
                             <div class="relative">
-                                <img src="https://picsum.photos/seed/special1/400/300" alt="糖醋排骨" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="../static/images/可乐鸡翅.jpg" alt="可乐鸡翅" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 <div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                                     特价
                                 </div>
                             </div>
                             <div class="p-5">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-gray-800 text-lg">糖醋排骨</h3>
+                                    <h3 class="font-bold text-gray-800 text-lg">可乐鸡翅</h3>
                                     <div class="flex items-center">
                                         <i class="fa fa-star text-yellow-400"></i>
                                         <span class="ml-1 text-gray-700">4.8</span>
@@ -192,7 +192,7 @@
                                 <p class="text-gray-600 text-sm mb-4">酸甜可口，外酥里嫩，色泽红亮的传统名菜。</p>
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <span class="text-orange-600 font-bold text-lg">¥29</span>
+                                        <span class="text-orange-600 font-bold text-lg">¥32</span>
                                         <span class="text-gray-400 line-through text-sm ml-2">¥42</span>
                                     </div>
                                     <button class="add-to-cart bg-orange-500 hover:bg-orange-600 text-white rounded-full p-2 transition-colors">
@@ -205,24 +205,24 @@
                         <!-- 特价商品卡片 2 -->
                         <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
                             <div class="relative">
-                                <img src="https://picsum.photos/seed/special2/400/300" alt="麻婆豆腐" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="../static/images/干煸牛肉.jpg" alt="干煸牛肉" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 <div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                                     特价
                                 </div>
                             </div>
                             <div class="p-5">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-gray-800 text-lg">麻婆豆腐</h3>
+                                    <h3 class="font-bold text-gray-800 text-lg">干煸牛肉</h3>
                                     <div class="flex items-center">
                                         <i class="fa fa-star text-yellow-400"></i>
                                         <span class="ml-1 text-gray-700">4.6</span>
                                     </div>
                                 </div>
-                                <p class="text-gray-600 text-sm mb-4">麻辣鲜香，豆腐嫩滑，肉末鲜香的川菜代表。</p>
+                                <p class="text-gray-600 text-sm mb-4">麻辣鲜香，嚼劲十足，刷剧零食的代表。</p>
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <span class="text-orange-600 font-bold text-lg">¥16</span>
-                                        <span class="text-gray-400 line-through text-sm ml-2">¥22</span>
+                                        <span class="text-orange-600 font-bold text-lg">¥42</span>
+                                        <span class="text-gray-400 line-through text-sm ml-2">¥56</span>
                                     </div>
                                     <button class="add-to-cart bg-orange-500 hover:bg-orange-600 text-white rounded-full p-2 transition-colors">
                                         <i class="fa fa-plus"></i>
@@ -234,7 +234,7 @@
                         <!-- 特价商品卡片 3 -->
                         <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
                             <div class="relative">
-                                <img src="https://picsum.photos/seed/special3/400/300" alt="珍珠奶茶" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="../static/images/珍珠奶茶.jpg" alt="珍珠奶茶" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 <div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                                     特价
                                 </div>
@@ -250,8 +250,8 @@
                                 <p class="text-gray-600 text-sm mb-4">香浓奶茶搭配Q弹珍珠，口感丰富，回味无穷。</p>
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <span class="text-orange-600 font-bold text-lg">¥12</span>
-                                        <span class="text-gray-400 line-through text-sm ml-2">¥18</span>
+                                        <span class="text-orange-600 font-bold text-lg">¥8</span>
+                                        <span class="text-gray-400 line-through text-sm ml-2">¥14</span>
                                     </div>
                                     <button class="add-to-cart bg-orange-500 hover:bg-orange-600 text-white rounded-full p-2 transition-colors">
                                         <i class="fa fa-plus"></i>
@@ -276,23 +276,23 @@
                         <!-- 热门商品卡片 1 -->
                         <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
                             <div class="relative">
-                                <img src="https://picsum.photos/seed/popular1/400/300" alt="宫保鸡丁" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="../static/images/土豆烧鸡.jpg" alt="土豆烧鸡" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 <div class="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
                                     热卖
                                 </div>
                             </div>
                             <div class="p-5">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-gray-800 text-lg">宫保鸡丁</h3>
+                                    <h3 class="font-bold text-gray-800 text-lg">土豆烧鸡</h3>
                                     <div class="flex items-center">
                                         <i class="fa fa-star text-yellow-400"></i>
                                         <span class="ml-1 text-gray-700">4.9</span>
                                     </div>
                                 </div>
-                                <p class="text-gray-600 text-sm mb-4">鸡肉鲜嫩，花生米酥脆，配以干辣椒，麻辣鲜香。</p>
+                                <p class="text-gray-600 text-sm mb-4">鸡肉鲜嫩，土豆软糯，配以主食，香而不腻。</p>
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <span class="text-orange-600 font-bold text-lg">¥38</span>
+                                        <span class="text-orange-600 font-bold text-lg">¥29</span>
                                     </div>
                                     <button class="add-to-cart bg-orange-500 hover:bg-orange-600 text-white rounded-full p-2 transition-colors">
                                         <i class="fa fa-plus"></i>
@@ -301,26 +301,26 @@
                             </div>
                         </div>
 
-                        <!-- 更多热门商品卡片... -->
+                        <!-- 热门商品卡片 2 -->
                         <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
                             <div class="relative">
-                                <img src="https://picsum.photos/seed/popular2/400/300" alt="鱼香肉丝" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="../static/images/麻婆豆腐.jpg" alt="麻婆豆腐" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 <div class="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
                                     热卖
                                 </div>
                             </div>
                             <div class="p-5">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-gray-800 text-lg">鱼香肉丝</h3>
+                                    <h3 class="font-bold text-gray-800 text-lg">麻婆豆腐</h3>
                                     <div class="flex items-center">
                                         <i class="fa fa-star text-yellow-400"></i>
                                         <span class="ml-1 text-gray-700">4.7</span>
                                     </div>
                                 </div>
-                                <p class="text-gray-600 text-sm mb-4">咸甜酸辣兼备，葱姜蒜香气浓郁，口感丰富。</p>
+                                <p class="text-gray-600 text-sm mb-4">豆腐轻弹，肉末点缀，口感丰富。</p>
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <span class="text-orange-600 font-bold text-lg">¥36</span>
+                                        <span class="text-orange-600 font-bold text-lg">¥18</span>
                                     </div>
                                     <button class="add-to-cart bg-orange-500 hover:bg-orange-600 text-white rounded-full p-2 transition-colors">
                                         <i class="fa fa-plus"></i>
@@ -329,25 +329,26 @@
                             </div>
                         </div>
 
+                        <!-- 热门商品卡片 3 -->
                         <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow group">
                             <div class="relative">
-                                <img src="https://picsum.photos/seed/popular3/400/300" alt="糖醋鲤鱼" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                                <img src="../static/images/酸辣土豆丝.jpg" alt="酸辣土豆丝" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
                                 <div class="absolute top-3 left-3 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
                                     热卖
                                 </div>
                             </div>
                             <div class="p-5">
                                 <div class="flex justify-between items-start mb-2">
-                                    <h3 class="font-bold text-gray-800 text-lg">糖醋鲤鱼</h3>
+                                    <h3 class="font-bold text-gray-800 text-lg">酸辣土豆丝</h3>
                                     <div class="flex items-center">
                                         <i class="fa fa-star text-yellow-400"></i>
                                         <span class="ml-1 text-gray-700">4.8</span>
                                     </div>
                                 </div>
-                                <p class="text-gray-600 text-sm mb-4">外酥里嫩，酸甜适口，造型美观，色泽红亮。</p>
+                                <p class="text-gray-600 text-sm mb-4">酸甜爽口，纤细清脆，家常良品。</p>
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <span class="text-orange-600 font-bold text-lg">¥58</span>
+                                        <span class="text-orange-600 font-bold text-lg">¥12</span>
                                     </div>
                                     <button class="add-to-cart bg-orange-500 hover:bg-orange-600 text-white rounded-full p-2 transition-colors">
                                         <i class="fa fa-plus"></i>
@@ -385,7 +386,7 @@
                 <div id="cartItemList" class="hidden space-y-4">
                     <!-- 购物车商品项示例 -->
                     <div class="cart-item flex items-center space-x-4 pb-4 border-b border-gray-100">
-                        <img src="https://picsum.photos/seed/special1/60/60" alt="糖醋排骨" class="w-16 h-16 rounded-lg object-cover">
+                        <img src="../static/images/糖醋排骨.jpg" alt="糖醋排骨" class="w-16 h-16 rounded-lg object-cover">
                         <div class="flex-1">
                             <h4 class="font-medium text-gray-800">糖醋排骨</h4>
                             <p class="text-orange-600 font-medium">¥29</p>
@@ -460,7 +461,7 @@
                     <h4 class="text-lg font-bold mb-4">快速链接</h4>
                     <ul class="space-y-2">
                         <li><a href="{{ url_for('home') }}" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">菜单</a></li>
+                        <li><a href="{{ url_for('menu') }}" class="text-gray-400 hover:text-white transition-colors">菜单</a></li>
                         <li><a href="{{ url_for('aboutus') }}" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
                     </ul>
                 </div>

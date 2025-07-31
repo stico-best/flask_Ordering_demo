@@ -57,3 +57,10 @@
 2025-07-31 16:43:42,138 - INFO - logutil.py:49 - user '123' login to system.
 2025-07-31 19:36:43,637 - INFO - logutil.py:49 - /login load Json file success.
 2025-07-31 19:36:43,637 - INFO - logutil.py:49 - user '111' login to system.
+2025-07-31 22:53:51,483 - INFO - logutil.py:49 - /register load json file success.
+2025-07-31 22:53:51,483 - INFO - logutil.py:49 - user stico has exists, please input correct password.
+2025-07-31 22:54:01,039 - INFO - logutil.py:49 - /register load json file success.
+2025-07-31 22:54:13,321 - INFO - logutil.py:49 - /login load Json file success.
+2025-07-31 22:54:13,321 - INFO - logutil.py:49 - user 'sticobest' login to system.
+2025-07-31 23:05:59,432 - INFO - logutil.py:49 - /login load Json file success.
+2025-07-31 23:05:59,432 - INFO - logutil.py:49 - user 'sticobest' login to system.

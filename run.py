@@ -1,5 +1,6 @@
 from app.main import app
-
+import os
 
 if __name__ == '__main__':
+    print(os.path.abspath(os.path.dirname(__file__)))
     app.run(debug=True, port=8000, host='0.0.0.0')

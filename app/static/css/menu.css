@@ -1,0 +1,67 @@
+/* 分类标签样式 */
+.category-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.tag-meat {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+.tag-vegetable {
+    background-color: #f0fdf4;
+    color: #16a34a;
+}
+
+.tag-bbq {
+    background-color: #fffbeb;
+    color: #d97706;
+}
+
+.tag-staple {
+    background-color: #f5f3ff;
+    color: #7c3aed;
+}
+
+.tag-soup {
+    background-color: #ecfdf5;
+    color: #059669;
+}
+
+.tag-drink {
+    background-color: #f0f9ff;
+    color: #0284c7;
+}
+
+/* 动画效果 */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.3s ease-out forwards;
+}
+
+.animate-fade-out {
+    animation: fade-out 0.5s ease-out forwards;
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "product": "宫保鸡丁",
+    "category": "荤菜",
+    "score": 4.7,
+    "introduction": "这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框",
+    "price": 38
+  },
+  {
+    "product": "鱼香肉丝",
+    "category": "荤菜",
+    "score": 4.6,
+    "introduction": "这是一个鱼香肉丝简介文本框",
+    "price": 36
+  },
+  {
+    "product": "糖醋排骨",
+    "category": "荤菜",
+    "score": 4.8,
+    "introduction": "这是一个糖醋排骨简介文本框",
+    "price": 42
+  },
+  {
+    "product": "麻婆豆腐",
+    "category": "素菜",
+    "score": 4.9,
+    "introduction": "这是一个麻婆豆腐简介文本框",
+    "price": 18
+  },
+  {
+    "product": "酸辣土豆丝",
+    "category": "素菜",
+    "score": 4.9,
+    "introduction": "这是一个酸辣土豆丝简介文本框",
+    "price": 12
+  },
+  {
+    "product": "西红柿鸡蛋汤",
+    "category": "汤品",
+    "score": 4.3,
+    "introduction": "这是一个西红柿鸡蛋汤简介文本框",
+    "price": 20
+  },
+  {
+    "product": "烤生蚝",
+    "category": "荤菜",
+    "score": 4.5,
+    "introduction": "这是一个烤生蚝简介文本框",
+    "price": 8
+  },
+  {
+    "product": "烤牛肉串/5串",
+    "category": "荤菜",
+    "score": 4.9,
+    "introduction": "这是一个烤牛肉串简介文本框",
+    "price": 20
+  },
+  {
+    "product": "酸梅汤",
+    "category": "饮品",
+    "score": 4.9,
+    "introduction": "这是一个酸梅汤简介文本框",
+    "price": 10
+  },
+  {
+    "product": "米饭",
+    "category": "主食",
+    "score": 4.2,
+    "introduction": "这是一个米饭简介文本框",
+    "price": 2
+  },
+  {
+    "product": "炒面",
+    "category": "主食",
+    "score": 4.2,
+    "introduction": "这是一个炒面简介文本框",
+    "price": 10
+  },
+  {
+    "product": "清蒸鲈鱼",
+    "category": "荤菜",
+    "score": 4.1,
+    "introduction": "这是一个清蒸鲈鱼简介文本框",
+    "price": 32
+  },
+  {
+    "product": "雪花啤酒/瓶",
+    "category": "饮品",
+    "score": 4.9,
+    "introduction": "这是一个雪花啤酒简介文本框",
+    "price": 4
+  },
+  {
+    "product": "麻辣小龙虾",
+    "category": "荤菜",
+    "score": 4.9,
+    "introduction": "这是一个麻辣小龙虾简介文本框",
+    "price": 120
+  },
+  {
+    "product": "烤油边/1串",
+    "category": "烧烤",
+    "score": 4.6,
+    "introduction": "这是一个烤油边简介文本框",
+    "price": 3
+  },
+  {
+    "product": "清炒杭白菜",
+    "category": "素菜",
+    "score": 4.4,
+    "introduction": "这是一个清炒杭白菜简介文本框",
+    "price": 12
+  }
+]

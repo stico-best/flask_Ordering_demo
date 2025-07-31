@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全部菜品 - 味美轩</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/menu.css">
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- 顶部导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="bg-white shadow-md">
+            <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+                <!-- 品牌标识 -->
+                <div class="flex items-center">
+                    <a href="#" class="text-3xl font-bold text-orange-600">味美轩</a>
+                    <span class="ml-2 text-gray-500 text-sm">美食餐厅</span>
+                </div>
+
+                <!-- 主导航 - 桌面版 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">首页</a>
+                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">精选套餐</a>
+                    <a href="{{ url_for('menu') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">全部菜品</a>
+                    <a href="{{ url_for('aboutus') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">关于我们</a>
+                </nav>
+
+                <!-- 用户操作区 -->
+                <div class="flex items-center space-x-4">
+                    <button id="cartBtn" class="relative p-2 text-gray-700 hover:text-orange-600 transition-colors">
+                        <i class="fa fa-shopping-cart text-xl"></i>
+                        <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    <button id="userBtn" class="p-2 text-gray-700 hover:text-orange-600 transition-colors">
+                        <i class="fa fa-user text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 pt-24 pb-16">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">全部菜品</h1>
+
+            <!-- 筛选工具栏 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- 商品分类下拉框 -->
+                    <div class="relative">
+                        <label for="categoryFilter" class="block text-sm font-medium text-gray-700 mb-1">商品分类</label>
+                        <select id="categoryFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500">
+                            <option value="all">全部菜品</option>
+                            <option value="荤菜">荤菜</option>
+                            <option value="素菜">素菜</option>
+                            <option value="烧烤">烧烤</option>
+                            <option value="主食">主食</option>
+                            <option value="汤品">汤品</option>
+                            <option value="饮品">饮品</option>
+                        </select>
+                    </div>
+
+                    <!-- 价格区间选择 -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">价格区间</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" id="minPrice" placeholder="最低价" class="w-1/3 px-3 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500">
+                            <span class="text-gray-500">-</span>
+                            <input type="number" id="maxPrice" placeholder="最高价" class="w-1/3 px-3 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500">
+                            <button id="applyPriceFilter" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors">应用</button>
+                        </div>
+                    </div>
+
+                    <!-- 搜索框和清空按钮 -->
+                    <div>
+                        <label for="searchInput" class="block text-sm font-medium text-gray-700 mb-1">搜索菜品</label>
+                        <div class="flex space-x-2">
+                            <div class="relative flex-1">
+                                <input type="text" id="searchInput" placeholder="输入菜品名称..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 pr-10">
+                                <button id="searchBtn" class="absolute right-3 top-2 text-gray-500 hover:text-orange-600">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <button id="resetFilterBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors whitespace-nowrap">
+                                <i class="fa fa-refresh mr-1"></i>清空
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 菜品表格 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">菜品名称</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">分类</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">简介</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">评分</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">价格</th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="menuTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- 菜品数据将通过JavaScript动态加载 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 无结果提示 -->
+            <div id="noResults" class="hidden text-center py-12">
+                <i class="fa fa-search text-gray-300 text-5xl mb-4"></i>
+                <h3 class="text-xl font-medium text-gray-500 mb-2">没有找到符合条件的菜品</h3>
+                <p class="text-gray-400">请尝试其他筛选条件或搜索关键词</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 购物车侧边栏 -->
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
+        <div class="flex flex-col h-full">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-gray-800">购物车</h3>
+                <button id="closeCartBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- 购物车为空时显示 -->
+                <div id="emptyCart" class="flex flex-col items-center justify-center h-full">
+                    <i class="fa fa-shopping-cart text-gray-300 text-6xl mb-4"></i>
+                    <p class="text-gray-500">购物车是空的</p>
+                    <button class="mt-4 text-orange-600 hover:text-orange-700 font-medium">
+                        立即点餐
+                    </button>
+                </div>
+
+                <!-- 购物车商品列表 (初始隐藏) -->
+                <div id="cartItemList" class="hidden space-y-4">
+                    <!-- 购物车商品项将通过JavaScript动态加载 -->
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-gray-100">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-gray-700 font-medium">总计</span>
+                    <span id="cartTotal" class="text-xl font-bold text-orange-600">¥0</span>
+                </div>
+                <button id="checkoutBtn" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    结算订单
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 用户菜单下拉框 -->
+    <div id="userMenu" class="fixed top-16 right-4 bg-white shadow-lg rounded-lg p-4 w-48 transform opacity-0 transition-all duration-300 pointer-events-none z-50">
+        <ul class="space-y-2">
+            <li><a href="#" class="block py-2 text-gray-700 hover:text-orange-600 transition-colors">
+                <i class="fa fa-user-circle mr-2"></i>个人主页
+            </a></li>
+            <li><a href="#" class="block py-2 text-gray-700 hover:text-orange-600 transition-colors">
+                <i class="fa fa-history mr-2"></i>订单历史
+            </a></li>
+            <li><a href="#" class="block py-2 text-gray-700 hover:text-orange-600 transition-colors">
+                <i class="fa fa-cog mr-2"></i>设置
+            </a></li>
+            <li class="border-t border-gray-100 pt-2 mt-2"><a href="#" class="block py-2 text-red-500 hover:text-red-600 transition-colors">
+                <i class="fa fa-sign-out mr-2"></i>退出登录
+            </a></li>
+        </ul>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">味美轩</h4>
+                    <p class="text-gray-400 mb-4">提供优质的美食体验，让您品尝到正宗的中华美食。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fa fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="{{ url_for('home') }}" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+                        <li><a href="{{ url_for('menu') }}" class="text-gray-400 hover:text-white transition-colors">菜单</a></li>
+                        <li><a href="{{ url_for('aboutus') }}" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">联系方式</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker mt-1 mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">上海市浦东新区金桥路2552弄</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">010-12345678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-3 text-gray-400"></i>
+                            <span class="text-gray-400">contact@weimeixuan.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-bold mb-4">营业时间</h4>
+                    <ul class="space-y-2">
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">周一至周五</span>
+                            <span class="text-gray-400">16:00 - 次日1:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">周六至周日</span>
+                            <span class="text-gray-400">16:00 - 次日4:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 味美轩 - 美食餐厅. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js/menu.js"></script>
+</body>
+</html>
