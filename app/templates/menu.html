@@ -1,3 +1,5 @@
+<!-- 全部菜品分页 -->
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -8,39 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/menu.css">
 </head>
-<body class="bg-gray-50 font-sans">
-    <!-- 顶部导航栏 -->
-    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
-        <div class="bg-white shadow-md">
-            <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-                <!-- 品牌标识 -->
-                <div class="flex items-center">
-                    <a href="#" class="text-3xl font-bold text-orange-600">味美轩</a>
-                    <span class="ml-2 text-gray-500 text-sm">美食餐厅</span>
-                </div>
 
-                <!-- 主导航 - 桌面版 -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">首页</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">精选套餐</a>
-                    <a href="{{ url_for('menu') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">全部菜品</a>
-                    <a href="{{ url_for('aboutus') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">关于我们</a>
-                </nav>
-
-                <!-- 用户操作区 -->
-                <div class="flex items-center space-x-4">
-                    <button id="cartBtn" class="relative p-2 text-gray-700 hover:text-orange-600 transition-colors">
-                        <i class="fa fa-shopping-cart text-xl"></i>
-                        <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                    </button>
-                    <button id="userBtn" class="p-2 text-gray-700 hover:text-orange-600 transition-colors">
-                        <i class="fa fa-user text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
+{% extends "base.html" %}
+{%block content%}
     <!-- 主内容区 -->
     <main class="container mx-auto px-4 pt-24 pb-16">
         <div class="mb-8">
@@ -119,6 +91,32 @@
                 <h3 class="text-xl font-medium text-gray-500 mb-2">没有找到符合条件的菜品</h3>
                 <p class="text-gray-400">请尝试其他筛选条件或搜索关键词</p>
             </div>
+
+            <!-- 分页控件 -->
+            <div id="pagination" class="mt-6 flex flex-col sm:flex-row items-center justify-between">
+                <div class="text-sm text-gray-500 mb-4 sm:mb-0">
+                    显示 <span id="startItem" class="font-medium">1</span> 到 <span id="endItem" class="font-medium">20</span> 条，共 <span id="totalItems" class="font-medium">0</span> 条记录
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="firstPage" class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fa fa-angle-double-left"></i>
+                    </button>
+                    <button id="prevPage" class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fa fa-angle-left"></i>
+                    </button>
+                    <div class="flex items-center space-x-1">
+                        <span class="text-gray-700">第</span>
+                        <input id="currentPageInput" type="number" min="1" value="1" class="w-12 px-2 py-1 border border-gray-300 rounded-md text-center">
+                        <span class="text-gray-700">页</span>
+                    </div>
+                    <button id="nextPage" class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fa fa-angle-right"></i>
+                    </button>
+                    <button id="lastPage" class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <i class="fa fa-angle-double-right"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -178,74 +176,5 @@
         </ul>
     </div>
 
-    <!-- 页脚 -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h4 class="text-xl font-bold mb-4">味美轩</h4>
-                    <p class="text-gray-400 mb-4">提供优质的美食体验，让您品尝到正宗的中华美食。</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-weixin text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-weibo text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-instagram text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
-                    <ul class="space-y-2">
-                        <li><a href="{{ url_for('home') }}" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
-                        <li><a href="{{ url_for('menu') }}" class="text-gray-400 hover:text-white transition-colors">菜单</a></li>
-                        <li><a href="{{ url_for('aboutus') }}" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">联系方式</h4>
-                    <ul class="space-y-2">
-                        <li class="flex items-start">
-                            <i class="fa fa-map-marker mt-1 mr-3 text-gray-400"></i>
-                            <span class="text-gray-400">上海市浦东新区金桥路2552弄</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-phone mr-3 text-gray-400"></i>
-                            <span class="text-gray-400">010-12345678</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-envelope mr-3 text-gray-400"></i>
-                            <span class="text-gray-400">contact@weimeixuan.com</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">营业时间</h4>
-                    <ul class="space-y-2">
-                        <li class="flex justify-between">
-                            <span class="text-gray-400">周一至周五</span>
-                            <span class="text-gray-400">16:00 - 次日1:00</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span class="text-gray-400">周六至周日</span>
-                            <span class="text-gray-400">16:00 - 次日4:00</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
-                <p>&copy; 2025 味美轩 - 美食餐厅. 保留所有权利.</p>
-            </div>
-        </div>
-    </footer>
-
     <script src="../static/js/menu.js"></script>
-</body>
-</html>
+{% endblock %}

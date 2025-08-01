@@ -10,7 +10,7 @@ app.secret_key = os.urandom(24)  # 随机密钥
 logger = Logger(log_file_path='app.log', log_level='INFO')
 
 # 登录页用户名密码, 前期用Json key-value代替, 后期做link mysql用户登录表
-user_json_path = 'database/'
+user_json_path = './app/static/database'
 user_json_file = 'user.json'
 
 
@@ -30,7 +30,8 @@ def login():
             with open(os.path.join(user_json_path, user_json_file), 'r') as f:
                 users_list = json.load(f)  # users: list[{u,p}, {u,p}]
             logger.info(f'/login load Json file success.')
-        except FileNotFoundError:
+        except FileNotFoundError as e:
+            print(f'error: {e}')
             return jsonify({'success': False, 'message': 'Json file not found.'}), 500
 
         user_found = False
@@ -94,3 +95,7 @@ def aboutus():
 @app.route('/menu')
 def menu():
     return render_template(template_name_or_list='menu.html')
+
+@app.route('/featured')
+def featured():
+    return render_template(template_name_or_list='featured.html')

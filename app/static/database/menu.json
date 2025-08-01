@@ -3,7 +3,7 @@
     "product": "宫保鸡丁",
     "category": "荤菜",
     "score": 4.7,
-    "introduction": "这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框这是一个宫保鸡丁简介文本框",
+    "introduction": "这是一个宫保鸡丁简介文本框",
     "price": 38
   },
   {
@@ -49,11 +49,11 @@
     "price": 8
   },
   {
-    "product": "烤牛肉串/5串",
+    "product": "烤牛肉串/1串",
     "category": "荤菜",
     "score": 4.9,
     "introduction": "这是一个烤牛肉串简介文本框",
-    "price": 20
+    "price": 5
   },
   {
     "product": "酸梅汤",
@@ -110,5 +110,145 @@
     "score": 4.4,
     "introduction": "这是一个清炒杭白菜简介文本框",
     "price": 12
+  },
+    {
+    "product": "麻辣香锅",
+    "category": "荤菜",
+    "score": 4.6,
+    "introduction": "这是一个麻辣香锅简介文本框",
+    "price": 68
+  },
+  {
+    "product": "江小白/瓶",
+    "category": "饮品",
+    "score": 4.9,
+    "introduction": "这是一个江小白简介文本框",
+    "price": 20
+  },
+  {
+    "product": "灌汤包/6个",
+    "category": "主食",
+    "score": 4.9,
+    "introduction": "这是一个灌汤包简介文本框",
+    "price": 12
+  },
+  {
+    "product": "烤韭菜/1串",
+    "category": "烧烤",
+    "score": 4.6,
+    "introduction": "这是一个烤韭菜简介文本框",
+    "price": 8
+  },
+  {
+    "product": "蒜蓉小龙虾",
+    "category": "素菜",
+    "score": 4.4,
+    "introduction": "这是一个蒜蓉小龙虾简介文本框",
+    "price": 120
+  },
+    {
+    "product": "红烧肉丸",
+    "category": "荤菜",
+    "score": 3.6,
+    "introduction": "这是一个红烧肉丸简介文本框",
+    "price": 40
+  },
+  {
+    "product": "美年达/瓶",
+    "category": "饮品",
+    "score": 4.4,
+    "introduction": "这是一个美年达简介文本框",
+    "price": 5
+  },
+  {
+    "product": "鸭血粉丝汤",
+    "category": "汤品",
+    "score": 4.9,
+    "introduction": "这是一个鸭血粉丝汤简介文本框",
+    "price": 20
+  },
+  {
+    "product": "烤羊肉串/1串",
+    "category": "烧烤",
+    "score": 4.6,
+    "introduction": "这是一个烤羊肉串简介文本框",
+    "price": 5
+  },
+  {
+    "product": "杂粮米饭",
+    "category": "主食",
+    "score": 5.0,
+    "introduction": "这是一个杂粮米饭简介文本框",
+    "price": 4
+  },
+    {
+    "product": "毛尖茶饮",
+    "category": "饮品",
+    "score": 4.8,
+    "introduction": "这是一个毛尖茶饮简介文本框",
+    "price": 50
+  },
+  {
+    "product": "阿萨姆奶茶/瓶",
+    "category": "饮品",
+    "score": 4.2,
+    "introduction": "这是一个阿萨姆奶茶简介文本框",
+    "price": 6
+  },
+  {
+    "product": "红烧牛蛙",
+    "category": "荤菜",
+    "score": 5.0,
+    "introduction": "这是一个红烧牛蛙简介文本框",
+    "price": 88
+  },
+  {
+    "product": "烤玉米/1串",
+    "category": "烧烤",
+    "score": 4.6,
+    "introduction": "这是一个烤玉米简介文本框",
+    "price": 6
+  },
+  {
+    "product": "清炒油麦菜",
+    "category": "素菜",
+    "score": 4.6,
+    "introduction": "这是一个清炒油麦菜简介文本框",
+    "price": 12
+  },
+    {
+    "product": "清炒冬瓜",
+    "category": "素菜",
+    "score": 4.4,
+    "introduction": "这是一个清朝冬瓜简介文本框",
+    "price": 12
+  },
+  {
+    "product": "矿泉水/瓶",
+    "category": "饮品",
+    "score": 4.9,
+    "introduction": "这是一个矿泉水简介文本框",
+    "price": 2
+  },
+  {
+    "product": "酸辣海带丝",
+    "category": "素菜",
+    "score": 4.9,
+    "introduction": "这是一个酸辣海带丝简介文本框",
+    "price": 12
+  },
+  {
+    "product": "农家小炒肉",
+    "category": "荤菜",
+    "score": 4.8,
+    "introduction": "这是一个农家小炒肉简介文本框",
+    "price": 28
+  },
+  {
+    "product": "金汤酸菜鱼",
+    "category": "汤品",
+    "score": 4.9,
+    "introduction": "这是一个金汤酸菜鱼简介文本框",
+    "price": 48
   }
 ]

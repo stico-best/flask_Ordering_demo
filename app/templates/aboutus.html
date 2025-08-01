@@ -1,4 +1,4 @@
-<!-- 关于我们 -->
+<!-- 关于我们分页 -->
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -10,39 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
-<body class="bg-gray-50 font-sans">
-    <!-- 顶部导航栏 (与首页保持一致) -->
-    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
-        <div class="bg-white shadow-md">
-            <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-                <!-- 品牌标识 -->
-                <div class="flex items-center">
-                    <a href="#" class="text-3xl font-bold text-orange-600">味美轩</a>
-                    <span class="ml-2 text-gray-500 text-sm">美食餐厅</span>
-                </div>
 
-                <!-- 主导航 - 桌面版 -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">首页</a>
-                    <a href="#" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">精选套餐</a>
-                    <a href="{{ url_for('menu') }}" class="text-gray-700 hover:text-orange-600 transition-colors font-medium">全部菜品</a>
-                    <a href="{{ url_for('aboutus') }}" class="text-orange-600 hover:text-orange-700 transition-colors font-medium">关于我们</a>
-                </nav>
-
-                <!-- 用户操作区 -->
-                <div class="flex items-center space-x-4">
-                    <button id="cartBtn" class="relative p-2 text-gray-700 hover:text-orange-600 transition-colors">
-                        <i class="fa fa-shopping-cart text-xl"></i>
-                        <span id="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                    </button>
-                    <button id="userBtn" class="p-2 text-gray-700 hover:text-orange-600 transition-colors">
-                        <i class="fa fa-user text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
+{% extends "base.html" %}
+{%block content%}
     <!-- 主内容区 -->
     <main class="container mx-auto px-4 pt-24 pb-16">
         <!-- 关于我们标题 -->
@@ -302,74 +272,5 @@
         </ul>
     </div>
 
-    <!-- 页脚 (与首页保持一致) -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h4 class="text-xl font-bold mb-4">味美轩</h4>
-                    <p class="text-gray-400 mb-4">提供优质的美食体验，让您品尝到正宗的中华美食。</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-weixin text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-weibo text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-instagram text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
-                    <ul class="space-y-2">
-                        <li><a href="{{ url_for('home') }}" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
-                        <li><a href="{{ url_for('menu') }}" class="text-gray-400 hover:text-white transition-colors">菜单</a></li>
-                        <li><a href="{{ url_for('aboutus') }}" class="text-gray-400 hover:text-white transition-colors">关于我们</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">联系方式</h4>
-                    <ul class="space-y-2">
-                        <li class="flex items-start">
-                            <i class="fa fa-map-marker mt-1 mr-3 text-gray-400"></i>
-                            <span class="text-gray-400">上海市浦东新区金桥路2552弄</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-phone mr-3 text-gray-400"></i>
-                            <span class="text-gray-400">010-12345678</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fa fa-envelope mr-3 text-gray-400"></i>
-                            <span class="text-gray-400">contact@weimeixuan.com</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-lg font-bold mb-4">营业时间</h4>
-                    <ul class="space-y-2">
-                        <li class="flex justify-between">
-                            <span class="text-gray-400">周一至周五</span>
-                            <span class="text-gray-400">16:00 - 次日1:00</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span class="text-gray-400">周六至周日</span>
-                            <span class="text-gray-400">16:00 - 次日4:00</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500">
-                <p>&copy; 2025 味美轩 - 美食餐厅. 保留所有权利.</p>
-            </div>
-        </div>
-    </footer>
-
     <script src="../static/js/script.js"></script>
-</body>
-</html>
+{% endblock %}

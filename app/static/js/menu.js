@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let menuData = [];
     let filteredData = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let currentPage = 1;
+    const itemsPerPage = 20;
 
     // DOM元素
     const menuTableBody = document.getElementById('menuTableBody');
@@ -14,6 +16,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
     const cartCount = document.getElementById('cartCount');
+
+    // 分页相关元素
+    const startItem = document.getElementById('startItem');
+    const endItem = document.getElementById('endItem');
+    const totalItems = document.getElementById('totalItems');
+    const firstPageBtn = document.getElementById('firstPage');
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const lastPageBtn = document.getElementById('lastPage');
+    const currentPageInput = document.getElementById('currentPageInput');
 
     // 购物车相关元素
     const cartSidebar = document.getElementById('cartSidebar');
@@ -41,6 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter') filterMenu();
     });
 
+    // 分页事件监听
+    firstPageBtn.addEventListener('click', goToFirstPage);
+    prevPageBtn.addEventListener('click', goToPrevPage);
+    nextPageBtn.addEventListener('click', goToNextPage);
+    lastPageBtn.addEventListener('click', goToLastPage);
+    currentPageInput.addEventListener('change', goToPage);
+
     // 获取清空按钮元素
     const resetFilterBtn = document.getElementById('resetFilterBtn');
     // 清空筛选条件
@@ -54,7 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInput.value = '';
         // 重新加载全部数据
         filteredData = [...menuData];
-        renderMenu(filteredData);
+        currentPage = 1;
+        currentPageInput.value = 1;
+        renderMenu();
     });
 
     // 购物车相关事件
@@ -76,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 menuData = data;
                 filteredData = [...data];
-                renderMenu(data);
+                renderMenu();
             })
             .catch(error => {
                 console.error('Error loading menu data:', error);
@@ -91,17 +112,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 渲染菜单表格
-    function renderMenu(data) {
-        if (data.length === 0) {
+    function renderMenu() {
+        if (filteredData.length === 0) {
             menuTableBody.innerHTML = '';
             noResults.classList.remove('hidden');
+            updatePaginationInfo();
             return;
         }
 
         noResults.classList.add('hidden');
         menuTableBody.innerHTML = '';
 
-        data.forEach(item => {
+        // 计算当前页的数据
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, filteredData.length);
+        const currentItems = filteredData.slice(startIndex, endIndex);
+
+        currentItems.forEach(item => {
             const row = document.createElement('tr');
             row.className = 'hover:bg-gray-50';
 
@@ -137,6 +165,9 @@ document.addEventListener('DOMContentLoaded', function() {
             menuTableBody.appendChild(row);
         });
 
+        // 更新分页信息
+        updatePaginationInfo();
+
         // 添加加入购物车事件
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', function() {
@@ -144,6 +175,73 @@ document.addEventListener('DOMContentLoaded', function() {
                 addToCart(productId);
             });
         });
+    }
+
+    // 更新分页信息
+    function updatePaginationInfo() {
+        const totalItemsCount = filteredData.length;
+        const totalPages = Math.ceil(totalItemsCount / itemsPerPage);
+
+        // 更新分页显示信息
+        const startIndex = (currentPage - 1) * itemsPerPage + 1;
+        const endIndex = Math.min(currentPage * itemsPerPage, totalItemsCount);
+
+        startItem.textContent = startIndex;
+        endItem.textContent = endIndex;
+        totalItems.textContent = totalItemsCount;
+
+        // 更新分页按钮状态
+        firstPageBtn.disabled = currentPage === 1;
+        prevPageBtn.disabled = currentPage === 1;
+        nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+        lastPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+
+        // 更新当前页码输入框
+        currentPageInput.value = currentPage;
+        currentPageInput.max = totalPages;
+    }
+
+    // 分页导航函数
+    function goToFirstPage() {
+        if (currentPage !== 1) {
+            currentPage = 1;
+            renderMenu();
+        }
+    }
+
+    function goToPrevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderMenu();
+        }
+    }
+
+    function goToNextPage() {
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderMenu();
+        }
+    }
+
+    function goToLastPage() {
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+        if (currentPage !== totalPages) {
+            currentPage = totalPages;
+            renderMenu();
+        }
+    }
+
+    function goToPage() {
+        const page = parseInt(currentPageInput.value);
+        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+        if (page >= 1 && page <= totalPages && page !== currentPage) {
+            currentPage = page;
+            renderMenu();
+        } else {
+            currentPageInput.value = currentPage;
+        }
     }
 
     // 筛选菜单
@@ -166,7 +264,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return categoryMatch && priceMatch && searchMatch;
         });
 
-        renderMenu(filteredData);
+        currentPage = 1;
+        currentPageInput.value = 1;
+        renderMenu();
     }
 
     // 购物车功能

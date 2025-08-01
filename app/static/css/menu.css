@@ -37,6 +37,17 @@
     color: #0284c7;
 }
 
+/* 分页输入框样式 */
+#currentPageInput {
+    -moz-appearance: textfield;
+}
+
+#currentPageInput::-webkit-outer-spin-button,
+#currentPageInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 /* 动画效果 */
 @keyframes fade-in-up {
     from {
