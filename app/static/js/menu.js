@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchMenuData();
     updateCartCount();
 
+    // 新增：检查URL参数并应用分类筛选
+    checkUrlParamsAndFilter();
+
     // 事件监听器
     categoryFilter.addEventListener('change', filterMenu);
     applyPriceFilter.addEventListener('click', filterMenu);
@@ -76,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
         currentPage = 1;
         currentPageInput.value = 1;
         renderMenu();
+
+        // 更新URL，移除category参数
+        updateUrlWithoutParam('category');
     });
 
     // 购物车相关事件
@@ -89,6 +95,37 @@ document.addEventListener('DOMContentLoaded', function() {
             hideUserMenu();
         }
     });
+
+    // 新增：检查URL参数并应用分类筛选
+    function checkUrlParamsAndFilter() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+
+        if (categoryParam) {
+            // 设置分类筛选
+            categoryFilter.value = categoryParam;
+            // 触发筛选
+            filterMenu();
+
+            // 可选：滚动到筛选区域
+            setTimeout(() => {
+                const filterSection = document.querySelector('.bg-white.rounded-xl.shadow-md.p-6.mb-8');
+                if (filterSection) {
+                    filterSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }, 300);
+        }
+    }
+
+    // 新增：更新URL，移除特定参数
+    function updateUrlWithoutParam(paramName) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete(paramName);
+        window.history.replaceState({}, '', url);
+    }
 
     // 获取菜单数据
     function fetchMenuData() {

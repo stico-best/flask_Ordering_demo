@@ -22,14 +22,13 @@
                 <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
                     <h2 class="text-xl font-bold text-gray-800 mb-4">美食分类</h2>
                     <ul class="space-y-2">
-                        <li><a href="#" class="category-item block py-2 px-4 rounded-lg bg-orange-50 text-orange-600 font-medium hover:bg-orange-100 transition-colors">全部菜品</a></li>
-                        <li><a href="#" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">招牌推荐</a></li>
-                        <li><a href="#" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">荤菜</a></li>
-                        <li><a href="#" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">素菜</a></li>
-                        <li><a href="#" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">烧烤</a></li>
-                        <li><a href="#" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">主食</a></li>
-                        <li><a href="#" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">汤品</a></li>
-                        <li><a href="#" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">饮品</a></li>
+                        <li><a href="{{ url_for('menu') }}" class="category-item block py-2 px-4 rounded-lg bg-orange-50 text-orange-600 font-medium hover:bg-orange-100 transition-colors">全部菜品</a></li>
+                        <li><a href="{{ url_for('menu') }}?category=荤菜" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">荤菜</a></li>
+                        <li><a href="{{ url_for('menu') }}?category=素菜" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">素菜</a></li>
+                        <li><a href="{{ url_for('menu') }}?category=烧烤" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">烧烤</a></li>
+                        <li><a href="{{ url_for('menu') }}?category=主食" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">主食</a></li>
+                        <li><a href="{{ url_for('menu') }}?category=汤品" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">汤品</a></li>
+                        <li><a href="{{ url_for('menu') }}?category=饮品" class="category-item block py-2 px-4 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors">饮品</a></li>
                     </ul>
 
                     <div class="mt-8 pt-6 border-t border-gray-100">

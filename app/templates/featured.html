@@ -1,19 +1,202 @@
-<!-- 精选套餐分页 -->
+<!-- 精品套餐分页 -->
 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>味美轩 - 美食餐厅</title>
+    <title>精品套餐 - 味美轩</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
-    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/menu.css">
 </head>
 
 {% extends "base.html" %}
-{%block content%}
-    <p>精选套餐分页</p>
-    <script src="../static/js/script.js"></script>
+{% block content %}
+    <div class="container mx-auto px-4 py-12">
+        <!-- 页面标题 -->
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">精选套餐</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">我们精心搭配的套餐组合，为您提供更优惠、更便捷的点餐体验</p>
+        </div>
+
+    <!-- 四宫格套餐展示 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 个人套餐 (左上) -->
+        <div class="package-card bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="relative">
+                <!-- 图片调整：增加高度+使用object-cover（保留主体裁剪边缘）+ 确保图片比例为16:9横版 -->
+                <img src="../static/images/个人经典套餐.png" alt="个人经典套餐" class="w-full h-100 object-cover">
+                <span class="absolute top-3 right-3 px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">8.5折优惠</span>
+            </div>
+            <!-- 文字区域：减少内边距，避免空间浪费 -->
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800 mb-2">个人经典套餐</h2>
+                <p class="text-gray-600 mb-3">适合一人享用的经典搭配，工作午餐最佳选择</p>
+
+                <div class="mb-4">
+                    <h3 class="font-medium text-gray-800 mb-2">包含菜品:</h3>
+                    <ul class="space-y-1.5 text-gray-600 text-sm"> <!-- 缩小文字大小，减少行间距 -->
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>主菜任选1份 (红烧牛肉/宫保鸡丁/鱼香肉丝)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>配菜任选1份 (清炒时蔬/凉拌黄瓜)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>主食任选1份 (白米饭/蛋炒饭)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-gray-500 line-through mr-2">¥68</span>
+                        <span class="text-2xl font-bold text-orange-600">¥58</span>
+                    </div>
+                    <button class="add-to-cart px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors" data-package="personal">
+                        <i class="fa fa-shopping-cart mr-2"></i>加入购物车
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 家庭套餐 (右上) -->
+        <div class="package-card bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="relative">
+                <img src="../static/images/家庭欢乐套餐.png" alt="家庭欢乐套餐" class="w-full h-100 object-cover">
+                <span class="absolute top-3 right-3 px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">8折优惠</span>
+            </div>
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800 mb-2">家庭欢乐套餐</h2>
+                <p class="text-gray-600 mb-3">3-4人份家庭套餐，共享温馨用餐时光</p>
+
+                <div class="mb-4">
+                    <h3 class="font-medium text-gray-800 mb-2">包含菜品:</h3>
+                    <ul class="space-y-1.5 text-gray-600 text-sm">
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>主菜任选2份 (水煮鱼/糖醋排骨/红烧狮子头/清蒸鲈鱼)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>配菜任选2份 (干煸四季豆/麻婆豆腐/蒜蓉空心菜)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>汤品任选1份 (紫菜蛋花汤/排骨玉米汤)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>主食任选1份 (白米饭(大)/扬州炒饭)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-gray-500 line-through mr-2">¥168</span>
+                        <span class="text-2xl font-bold text-orange-600">¥134</span>
+                    </div>
+                    <button class="add-to-cart px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors" data-package="family">
+                        <i class="fa fa-shopping-cart mr-2"></i>加入购物车
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 多人套餐 (左下) -->
+        <div class="package-card bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="relative">
+                <img src="../static/images/多人聚会套餐.png" alt="多人聚会套餐" class="w-full h-100 object-cover">
+                <span class="absolute top-3 right-3 px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">7.5折优惠</span>
+            </div>
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800 mb-2">多人聚会套餐</h2>
+                <p class="text-gray-600 mb-3">6-8人份豪华套餐，朋友聚会最佳选择</p>
+
+                <div class="mb-4">
+                    <h3 class="font-medium text-gray-800 mb-2">包含菜品:</h3>
+                    <ul class="space-y-1.5 text-gray-600 text-sm">
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>主菜任选4份 (北京烤鸭/清蒸大闸蟹/红烧肉/辣子鸡/回锅肉)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>配菜任选3份 (凉拌木耳/拍黄瓜/皮蛋豆腐)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>汤品任选1份 (酸辣汤/老鸭汤)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>主食任选1份 (白米饭(特大)/葱油饼)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-gray-500 line-through mr-2">¥328</span>
+                        <span class="text-2xl font-bold text-orange-600">¥246</span>
+                    </div>
+                    <button class="add-to-cart px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors" data-package="group">
+                        <i class="fa fa-shopping-cart mr-2"></i>加入购物车
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 工作套餐 (右下) -->
+        <div class="package-card bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="relative">
+                <img src="../static/images/商务工作套餐.png" alt="商务工作套餐" class="w-full h-100 object-cover">
+                <span class="absolute top-3 right-3 px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">9折优惠</span>
+            </div>
+            <div class="p-4">
+                <h2 class="text-xl font-bold text-gray-800 mb-2">商务工作套餐</h2>
+                <p class="text-gray-600 mb-3">精致商务套餐，会议用餐专业之选</p>
+
+                <div class="mb-4">
+                    <h3 class="font-medium text-gray-800 mb-2">包含菜品:</h3>
+                    <ul class="space-y-1.5 text-gray-600 text-sm">
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>主菜任选1份 (黑椒牛柳/清蒸鲈鱼/宫保虾球)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>配菜任选2份 (清炒芦笋/香菇菜心/凉拌海蜇)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>汤品任选1份 (西湖牛肉羹/虫草花鸡汤)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-green-500 mr-2"></i>
+                            <span>主食任选1份 (杂粮饭/海鲜炒饭)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="text-gray-500 line-through mr-2">¥98</span>
+                        <span class="text-2xl font-bold text-orange-600">¥88</span>
+                    </div>
+                    <button class="add-to-cart px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors" data-package="business">
+                        <i class="fa fa-shopping-cart mr-2"></i>加入购物车
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="../static/js/featured.js"></script>
 {% endblock %}
