@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
-from config.logutil import Logger
 import os
 import json
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, send_from_directory
+from config.logutil import Logger
+from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # 随机密钥
@@ -13,6 +14,13 @@ logger = Logger(log_file_path='app.log', log_level='INFO')
 user_json_path = './app/static/database'
 user_json_file = 'user.json'
 
+def check_login(f):
+    @wraps(f)
+    def recheck_session(*args, **kwargs):
+        if not session.get("logged_in", False):
+            return redirect(url_for("login"))
+        return f(*args, **kwargs)
+    return recheck_session
 
 @app.route('/')
 def login_page():
@@ -38,6 +46,7 @@ def login():
         for users_index in users_list:
             if users_index["username"] == username and users_index["password"] == password:
                 session['username'] = username
+                session['logged_in'] = True
                 logger.info(f"user '{username}' login to system.")
                 return jsonify({'success': True, 'message': 'login success'})
 
@@ -85,17 +94,21 @@ def register():
             return jsonify({'success': False, 'message': f'register fail: {str(e)}'}), 500
 
 @app.route('/home')
+@check_login
 def home():
     return render_template(template_name_or_list='home.html')
 
 @app.route('/aboutus')
+@check_login
 def aboutus():
     return render_template(template_name_or_list='aboutus.html')
 
 @app.route('/menu')
+@check_login
 def menu():
     return render_template(template_name_or_list='menu.html')
 
 @app.route('/featured')
+@check_login
 def featured():
     return render_template(template_name_or_list='featured.html')

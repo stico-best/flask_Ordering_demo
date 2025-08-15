@@ -71,7 +71,8 @@ document.getElementById('nextBtn').addEventListener('click', () => {
     }, 5000);
 });
 
-// 购物车功能
+////////////////////////////////////////////////////////////
+// 购物车功能 //
 const cartSidebar = document.getElementById('cartSidebar');
 const cartBtn = document.getElementById('cartBtn');
 const closeCartBtn = document.getElementById('closeCartBtn');
